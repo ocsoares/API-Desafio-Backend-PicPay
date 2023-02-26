@@ -1,0 +1,88 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "tsconfig.json",
+        "tsconfigRootDir": ".",
+        "ecmaVersion": 2020,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint/eslint-plugin"
+    ],
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+        // "airbnb-base",
+        // "airbnb-typescript/base"
+    ],
+    "root": true,
+    "env": {
+        "node": true,
+        "jest": true
+    },
+    "ignorePatterns": [
+        ".eslintrc.js"
+    ],
+    "rules": {
+        // "prettier/prettier": "off",
+        "prefer-template":"error",
+        "prettier/prettier": ["error", { "endOfLine": "auto" }],
+        "prefer-destructuring": ["error", {
+            "array": true,
+            "object": true
+          }, {
+            // "enforceForRenamedProperties": true
+          }],
+        "@typescript-eslint/linebreak-style": "off",
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
+        // "brace-style": ["error", "stroustrup"], // Conflict with Enter
+        "no-multiple-empty-lines": ["error", { "max": 1 }],
+        "space-before-blocks": ["error", "always"],
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "*", "next": "return" },
+            { "blankLine": "always", "prev": "*", "next": "function" },
+            { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
+            { "blankLine": "any",    "prev": ["const", "let", "var"], "next": ["const", "let", "var"]}
+        ],
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "variable",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE", "snake_case"],
+                "leadingUnderscore": "forbid",
+                "trailingUnderscore": "allow"
+            },
+            {
+              "selector": "parameter",
+              "format": ["camelCase", "snake_case"]
+            },
+            {
+                "selector": "property",
+                "format": ["camelCase", "UPPER_CASE", "snake_case"],
+                "leadingUnderscore": "allow",
+                "trailingUnderscore": "allow",
+                "filter": {
+                    "regex": "^(__v)$", // PERMITE o uso da Propriedade de nome __v !!! <<<
+                    "match": false
+                }                  
+            },
+            {
+                "selector": "memberLike",
+                "modifiers": ["private"],
+                "format": ["camelCase"],
+                "leadingUnderscore": "require"
+            },
+            {
+                "selector": "property",
+                "modifiers": ["private"],
+                "format": ["camelCase"],
+                "leadingUnderscore": "require"
+            }
+          ]          
+    }
+}

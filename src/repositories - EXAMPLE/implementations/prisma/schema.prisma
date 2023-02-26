@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("PRISMA_URL")
+}
+
+model User {
+    id          String        @id @default(uuid()) // Usando UUID !!
+    name        String        @unique
+    email       String        @unique
+    password    String
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+    Transaction Transaction[]
+    Payables    Payables[]
+
+    // ALTERA o Nome da TABELA para o Especificado aqui, porque senão usa o nome do Model (ex. aqui seria User) !!!
+    // OBS: E as Tabelas com o Nome em MÁISCULO pode dar conflito e NÃO ler essas Tabelas !!
+    @@map("users")
+}
+
+enum PaymentMethod {
+    debit_card
+    credit_card
+}
+
+model Transaction {
+    id              String        @id @default(uuid())
+    account         User          @relation(fields: [account_id], references: [id])
+    account_id      String
+    transfer_id     String // Linkar com o PRÓPRIO id do Transaction...
+    date            DateTime      @default(now())
+    transfer_amount Float
+    description     String
+    payment_method  PaymentMethod
+    card_number     String        @db.VarChar(8)
+    card_holder     String
+    createdAt       DateTime      @default(now())
+    updatedAt       DateTime      @updatedAt
+
+    @@map("transactions")
+}
