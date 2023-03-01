@@ -5,8 +5,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { CreateUserController } from './use-cases/create-user/create-user.controller';
 import { CreateUserService } from './use-cases/create-user/create-user.service';
 
-// OBS: O JwtModule TEM que ser Async, porque se não for NÃO carrega as Variáveis de Ambiente !!!
-
 @Module({
     imports: [
         JwtModule.registerAsync({
