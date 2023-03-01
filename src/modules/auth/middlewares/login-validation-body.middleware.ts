@@ -7,8 +7,6 @@ import { NextFunction, Request, Response } from 'express';
 import { LoginRequestBody } from '../models/LoginRequestBody';
 import { validate } from 'class-validator';
 
-// Esse Middleware é usado em AuthModule !!!
-
 @Injectable()
 export class LoginValidationBodyMiddleware implements NestMiddleware {
     async use(req: Request, res: Response, next: NextFunction) {

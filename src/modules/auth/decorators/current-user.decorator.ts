@@ -1,5 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
-import { IReturnUser } from 'src/interfaces/IReturnUser';
+import { IReturnUser } from 'src/interfaces/return-to-body/IReturnUser';
 import { IAuthRequest } from '../types/IAuthRequest';
 
 export const CurrentUser = createParamDecorator(

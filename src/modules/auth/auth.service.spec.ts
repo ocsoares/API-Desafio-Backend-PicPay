@@ -65,7 +65,7 @@ describe('AuthService', () => {
     });
 
     it('should NOT validade a user if compare password is invalid', async () => {
-        (repository.findByEmail as jest.Mock).mockResolvedValue(user); // Para PASSAR na Validação do Email e ir para a do Password...
+        (repository.findByEmail as jest.Mock).mockResolvedValue(user);
         bcryptSpy.mockResolvedValue(false);
 
         await expect(
