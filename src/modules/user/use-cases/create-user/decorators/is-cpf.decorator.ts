@@ -8,7 +8,7 @@ import {
 
 import { cpf } from 'cpf-cnpj-validator';
 
-function validateCPF(value: string): boolean {
+function isValidCPF(value: string): boolean {
     const formatCPF = cpf.format(value);
 
     if (value !== formatCPF) {
@@ -19,18 +19,18 @@ function validateCPF(value: string): boolean {
 }
 
 export function IsCPF(validationOptions?: ValidationOptions) {
-    return function (object: object, propertyName: string) {
+    return function (object: Record<string, any>, propertyName: string) {
         registerDecorator({
             name: 'isCPF',
             target: object.constructor,
             propertyName: propertyName,
             options: validationOptions,
             validator: {
-                validate(value: any, args: ValidationArguments) {
-                    return validateCPF(value);
+                validate(value: any, args: ValidationArguments): boolean {
+                    return isValidCPF(value);
                 },
-                defaultMessage(args: ValidationArguments) {
-                    return `${args.property} deve ser um CPF válido`;
+                defaultMessage(args: ValidationArguments): string {
+                    return `${args.property} must be a cpf`;
                 },
             },
         });
