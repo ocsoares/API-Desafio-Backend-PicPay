@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { IsCPF } from '../decorators/is-cpf.decorator';
+import { IsCPF } from 'class-validator-cpf';
 
 export class CreateUserDTO {
     @IsNotEmpty()

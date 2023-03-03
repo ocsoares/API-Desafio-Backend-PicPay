@@ -36,6 +36,7 @@
     "bcrypt": "^5.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.0",
+    "class-validator-cpf": "^1.0.6",
     "cpf-cnpj-validator": "^1.0.3",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",

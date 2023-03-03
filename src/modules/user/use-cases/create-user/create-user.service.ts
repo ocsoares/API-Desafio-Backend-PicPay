@@ -6,14 +6,17 @@ import { UserExistsByCpfException } from 'src/exceptions/user-exceptions/user-ex
 import { UserExistsByEmailException } from 'src/exceptions/user-exceptions/user-exists-by-email.exception';
 import { UserRepository } from 'src/repositories/abstracts/UserRepository';
 import * as bcrypt from 'bcrypt';
+import { cpf } from 'cpf-cnpj-validator';
 
 @Injectable()
 export class CreateUserService implements IService {
     constructor(private readonly _createUserRepository: UserRepository) {}
 
     async execute(data: IUser): Promise<IReturnUser> {
+        const formattedCPF = cpf.strip(data.cpf); // Remove CPF punctuation if it exists
+
         const findUserByCPF = await this._createUserRepository.findByCPF(
-            data.cpf,
+            formattedCPF,
         );
 
         if (findUserByCPF) {
@@ -30,6 +33,7 @@ export class CreateUserService implements IService {
 
         const createUser = await this._createUserRepository.create({
             ...data,
+            cpf: formattedCPF,
             password: await bcrypt.hash(data.password, 10),
             balance: 0,
         });
