@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { IService } from 'src/interfaces/IService';
-import { IReturnUser } from 'src/interfaces/return-to-body/IReturnUser';
-import { IUser } from 'src/models/IUser';
-import { UserExistsByCpfException } from 'src/exceptions/user-exceptions/user-exists-by-cpf.exception';
-import { UserExistsByEmailException } from 'src/exceptions/user-exceptions/user-exists-by-email.exception';
-import { UserRepository } from 'src/repositories/abstracts/UserRepository';
+import { IService } from '../../../../interfaces/IService';
+import { IReturnUser } from '../../../../interfaces/return-to-body/IReturnUser';
+import { IUser } from '../../../../models/IUser';
+import { UserExistsByCpfException } from '../../../../exceptions/user-exceptions/user-exists-by-cpf.exception';
+import { UserExistsByEmailException } from '../../../../exceptions/user-exceptions/user-exists-by-email.exception';
+import { UserRepository } from '../../../../repositories/abstracts/UserRepository';
 import * as bcrypt from 'bcrypt';
 import { cpf } from 'cpf-cnpj-validator';
 

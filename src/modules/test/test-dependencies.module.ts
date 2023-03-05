@@ -1,18 +1,15 @@
 import { Global, Module } from '@nestjs/common';
-import { PrismaUserRepository } from 'src/repositories/implementations/prisma/user/PrismaUserRepository';
 import { UserRepository } from '../../repositories/abstracts/UserRepository';
 import { UserModule } from '../user/user.module';
+import { SQLInMemoryUserRepository } from './sql-in-memory/sql-in-memory-user-repository.service';
 
 @Global()
 @Module({
-    imports: [
-        UserModule,
-        // COLOCAR UMA DATABASE IN MEMORY AQUI !!
-    ],
+    imports: [UserModule],
     providers: [
         {
             provide: UserRepository,
-            useClass: PrismaUserRepository,
+            useClass: SQLInMemoryUserRepository,
         },
     ],
     exports: [UserRepository],

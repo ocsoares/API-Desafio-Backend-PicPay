@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { IController, returnHandle } from 'src/interfaces/IController';
-import { IsPublic } from 'src/modules/auth/decorators/is-public.decorator';
+import { IsPublic } from '../../../../modules/auth/decorators/is-public.decorator';
 import { CreateUserService } from './create-user.service';
 import { CreateUserDTO } from './dtos/CreateUserDTO';
 

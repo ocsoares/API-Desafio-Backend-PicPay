@@ -11,7 +11,7 @@ export class PrismaUserRepository implements UserRepository {
         const createUser = await this._prismaService.user.create({
             data: {
                 ...data,
-                balance: data.balance, // Como é Opcional, estava dando ERRO
+                balance: data.balance,
             },
         });
 
