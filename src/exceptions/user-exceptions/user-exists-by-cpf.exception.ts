@@ -1,7 +1,10 @@
 import { HttpException } from '@nestjs/common';
 
+export const cpfExceptionMessage =
+    'A user is already registered with this CPF !';
+
 export class UserExistsByCpfException extends HttpException {
     constructor() {
-        super('A user is already registered with this CPF !', 400);
+        super(cpfExceptionMessage, 400);
     }
 }
