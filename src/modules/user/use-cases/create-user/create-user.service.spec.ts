@@ -5,7 +5,7 @@ import { CreateUserService } from './create-user.service';
 import { UserExistsByCpfException } from '../../../../exceptions/user-exceptions/user-exists-by-cpf.exception';
 import { UserExistsByEmailException } from '../../../../exceptions/user-exceptions/user-exists-by-email.exception';
 import * as bcrypt from 'bcrypt';
-import { IReturnUser } from 'src/interfaces/return-to-body/IReturnUser';
+import { IReturnUser } from 'src/interfaces/return-to-request/IReturnUser';
 
 describe('CreateUserService', () => {
     let createUserService: CreateUserService;

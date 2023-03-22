@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { IService } from '../../../../interfaces/IService';
-import { IReturnUser } from '../../../../interfaces/return-to-body/IReturnUser';
+import { IReturnUser } from '../../../../interfaces/return-to-request/IReturnUser';
 import { IUser } from '../../../../models/IUser';
 import { UserExistsByCpfException } from '../../../../exceptions/user-exceptions/user-exists-by-cpf.exception';
 import { UserExistsByEmailException } from '../../../../exceptions/user-exceptions/user-exists-by-email.exception';

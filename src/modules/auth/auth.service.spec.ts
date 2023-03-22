@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserRepository } from '../../repositories - EXAMPLE/abstracts/UserRepository';
+import { UserRepository } from '../../repositories/abstracts/UserRepository';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { IUser } from 'src/models/IUser';
+import { LoginRequestBody } from './models/LoginRequestBody';
 
 describe('AuthService', () => {
     let service: AuthService;
@@ -11,14 +12,13 @@ describe('AuthService', () => {
 
     const user: IUser = {
         id: 'any_id',
-        name: 'UserTeste',
+        full_name: 'UserTeste',
         email: 'userteste@gmail.com',
+        cpf: '516.204.440-70',
         password: 'userteste123',
     };
 
-    type authUserData = { email: string; password: string };
-
-    const userData: authUserData = {
+    const userData: LoginRequestBody = {
         email: 'teste@gmail.com',
         password: 'teste123',
     };

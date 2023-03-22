@@ -8,7 +8,7 @@ import * as supertest from 'supertest';
 import { cpfExceptionMessage } from '../../../../exceptions/user-exceptions/user-exists-by-cpf.exception';
 import { CreateUserDTO } from './dtos/CreateUserDTO';
 import { emailExceptionMessage } from '../../../../exceptions/user-exceptions/user-exists-by-email.exception';
-import { IReturnUser } from '../../../../interfaces/return-to-body/IReturnUser';
+import { IReturnUser } from '../../../../interfaces/return-to-request/IReturnUser';
 import * as bcrypt from 'bcrypt';
 
 describe('CreateUserController', () => {

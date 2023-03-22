@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from '../../repositories/abstracts/UserRepository';
 import * as bcrypt from 'bcrypt';
-import { IReturnUser } from 'src/interfaces/return-to-body/IReturnUser';
+import { IReturnUser } from 'src/interfaces/return-to-request/IReturnUser';
 
 interface IAuthService {
     validateUser(email: string, password: string): Promise<IReturnUser>;

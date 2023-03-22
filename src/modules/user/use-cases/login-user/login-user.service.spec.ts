@@ -14,7 +14,7 @@ describe('LoginUserService', () => {
                 LoginUserService,
                 {
                     provide: JwtService,
-                    useExisting: JwtService, // Usa uma Instância EXISTENTE de JwtService (OBRIGATÓRIO) !!!
+                    useExisting: JwtService, // Usa uma Instância EXISTENTE de JwtService
                     useValue: {
                         sign: jest.fn().mockResolvedValue(JWT),
                     },
@@ -31,10 +31,12 @@ describe('LoginUserService', () => {
         expect(service).toBeDefined();
     });
 
+    // FAZER Testes também que NÃO passam !!!
+
     it('should generate a JWT with a valid payload', async () => {
         const payload: IUserPayload = {
             sub: 'any_id',
-            name: 'Teste',
+            full_name: 'Teste',
             email: 'teste@gmail.com',
         };
 

@@ -1,11 +1,4 @@
-import {
-    Controller,
-    HttpCode,
-    HttpStatus,
-    Post,
-    Request,
-    UseGuards,
-} from '@nestjs/common';
+import { Controller, HttpCode, Post, Request, UseGuards } from '@nestjs/common';
 import { IController, returnHandle } from 'src/interfaces/IController';
 import { LocalAuthGuard } from '../../../auth/guards/local-auth.guard';
 import { IAuthRequest } from 'src/modules/auth/types/IAuthRequest';
@@ -18,7 +11,7 @@ export class LoginUserController implements IController {
 
     @IsPublic()
     @Post('login')
-    @HttpCode(HttpStatus.OK)
+    @HttpCode(200)
     @UseGuards(LocalAuthGuard)
     async handle(@Request() req: IAuthRequest): Promise<returnHandle> {
         const JWT = await this._loginUserService.execute(req.user);
