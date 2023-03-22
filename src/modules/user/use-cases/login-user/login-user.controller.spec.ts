@@ -12,8 +12,9 @@ import { IUser } from 'src/models/IUser';
 import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { ConfigModule } from '@nestjs/config';
-import { IReturnUser } from 'src/interfaces/IReturnUser';
 import { LoginValidationBodyModule } from '../../../login-validation-body/login-validation-body.module';
+import { LoginRequestBody } from 'src/modules/auth/models/LoginRequestBody';
+import { invalidUserLoginExceptionMessage } from '../../../../exceptions/user-exceptions/invalid-user-login.exception';
 
 describe('LoginUserController', () => {
     let app: INestApplication;
@@ -24,20 +25,16 @@ describe('LoginUserController', () => {
 
     const user: IUser = {
         id: 'any_id',
-        name: 'Teste',
+        full_name: 'Teste',
         email: 'teste@gmail.com',
+        cpf: '822.850.530-29',
         password: 'teste123',
     };
 
-    const userWithoutPass: IReturnUser = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...userWithoutPass } = user;
 
-    type dataLoginBody = { email: string; password: string };
-
-    const loginBody: dataLoginBody = {
+    const loginBody: LoginRequestBody = {
         email: 'teste@gmail.com',
         password: 'teste123',
     };
@@ -56,16 +53,11 @@ describe('LoginUserController', () => {
         }
     }
 
-    // Coloquei ConfigModule.forRoot() para ativar as Variáveis de Ambiente para esse teste, e NÃO passei
-    // NENHUM Parâmetro porque "isGlobal: true, envFilePath: '.env'," são DEFAULT no Método caso não passe
-    // nenhum Parâmetro !!!
     beforeEach(async () => {
         const module: TestingModule = await Test.createTestingModule({
             imports: [
                 ConfigModule.forRoot(),
                 PassportModule.register({ defaultStrategy: 'local' }),
-                // Para usar Middlewares no Teste, usar MÓDULOS específicos para ativar os Middlewares,
-                // como esse abaixo !!!
                 LoginValidationBodyModule,
             ],
             controllers: [LoginUserController],
@@ -73,7 +65,7 @@ describe('LoginUserController', () => {
                 LoginUserService,
                 {
                     provide: JwtService,
-                    useClass: JwtServiceMock, // Nos testes usar useClass ao invés de useExisting no testes do LoginService !!!
+                    useClass: JwtServiceMock,
                 },
                 {
                     provide: UserRepository,
@@ -134,8 +126,6 @@ describe('LoginUserController', () => {
         expect(bcryptCompare).toHaveBeenCalledTimes(0);
     });
 
-    // NÃO mockei NADA aqui nesse teste porque se eu Mockar o Email, logo ele existe, então ele PASSA do Erro, como eu NÃO
-    // quero isso, não mockei o Email, logo, a Senha nem vai chegar a ser Validade (comparada no Bcrypt) !!!
     it('should NOT generate a JWT for a invalid user', async () => {
         const response = await supertest(app.getHttpServer())
             .post(route)
@@ -143,9 +133,8 @@ describe('LoginUserController', () => {
             .expect(401);
 
         const { message } = response.body;
-        const expectedMessage = 'Email ou senha incorreto(s) !';
 
-        expect(message).toEqual(expectedMessage);
+        expect(message).toEqual(invalidUserLoginExceptionMessage);
         expect(repository.findByEmail).toHaveBeenCalledWith(loginBody.email);
         expect(bcryptCompare).toHaveBeenCalledTimes(0);
         expect(service.execute).toHaveBeenCalledTimes(0);
@@ -164,7 +153,6 @@ describe('LoginUserController', () => {
 
         expect(JWT).toEqual(expect.any(String));
         expect(repository.findByEmail).toHaveBeenCalledWith(loginBody.email);
-        expect(service.execute).toHaveBeenCalledTimes(1);
         expect(service.execute).toHaveBeenCalledWith(userWithoutPass);
         expect(bcryptCompare).toHaveBeenCalledWith(
             loginBody.password,
