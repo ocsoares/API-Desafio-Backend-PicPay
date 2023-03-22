@@ -36,6 +36,7 @@ describe('LoginUserService', () => {
     it('should generate a JWT with a valid payload', async () => {
         const payload: IUserPayload = {
             sub: 'any_id',
+            role: 'user',
             full_name: 'Teste',
             email: 'teste@gmail.com',
         };

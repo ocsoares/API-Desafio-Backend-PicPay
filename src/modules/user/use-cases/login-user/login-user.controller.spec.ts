@@ -25,6 +25,7 @@ describe('LoginUserController', () => {
 
     const user: IUser = {
         id: 'any_id',
+        role: 'user',
         full_name: 'Teste',
         email: 'teste@gmail.com',
         cpf: '822.850.530-29',
@@ -39,11 +40,8 @@ describe('LoginUserController', () => {
         password: 'teste123',
     };
 
-    // TENTAR fazer SEM MOCK, usando o Original com Chave secreta e useFacory talvez...
-
     // Classe mockada com uma Chave Secreta, porque por algum motivo esse Método em LoginUserService NÃO
     // estava ativando a Chave Secreta !!!
-    // OBS: Colocar essa Classe em useClass abaixo de provide: JwtService !!
     class JwtServiceMock extends JwtService {
         private readonly _secretKey = process.env.JWT_SECRET;
 

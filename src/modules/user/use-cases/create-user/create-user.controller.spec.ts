@@ -18,6 +18,7 @@ describe('CreateUserController', () => {
     const route = '/auth/register';
 
     const userData: CreateUserDTO = {
+        role: 'shopkeeper',
         full_name: 'Lucas Roberto',
         cpf: '927.044.150-48',
         email: 'lucasroberto@gmail.com',
@@ -79,6 +80,8 @@ describe('CreateUserController', () => {
         const expectedMessage = [
             'property full_nadsdsme should not exist',
             'property apple should not exist',
+            'role must be one of the following values: user,shopkeeper',
+            'role should not be empty',
             'full_name must be a string',
             'full_name should not be empty',
             'cpf must be a cpf',
@@ -161,6 +164,7 @@ describe('CreateUserController', () => {
             .expect(201);
 
         const expectedBodyResponse: IReturnUser = {
+            role: userData.role,
             full_name: userData.full_name,
             email: userData.email,
         };

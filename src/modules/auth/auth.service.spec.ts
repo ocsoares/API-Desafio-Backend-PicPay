@@ -12,6 +12,7 @@ describe('AuthService', () => {
 
     const user: IUser = {
         id: 'any_id',
+        role: 'shopkeeper',
         full_name: 'UserTeste',
         email: 'userteste@gmail.com',
         cpf: '516.204.440-70',

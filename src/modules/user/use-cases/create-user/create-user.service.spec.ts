@@ -12,6 +12,7 @@ describe('CreateUserService', () => {
     let userRepository: UserRepository;
 
     const userData: IUser = {
+        role: 'user',
         full_name: 'Lucas Roberto',
         cpf: '482.935.470-49',
         email: 'lucasroberto@gmail.com',
@@ -91,6 +92,7 @@ describe('CreateUserService', () => {
         const createUser = await createUserService.execute(userData);
 
         const returnData: IReturnUser = {
+            role: createData.role,
             full_name: createData.full_name,
             email: createData.email,
         };
