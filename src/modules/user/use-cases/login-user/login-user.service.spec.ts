@@ -31,7 +31,7 @@ describe('LoginUserService', () => {
         expect(service).toBeDefined();
     });
 
-    // FAZER Testes também que NÃO passam !!!
+    // Testar apenas se está retornando um JWT válido (MOCKADO)
 
     it('should generate a JWT with a valid payload', async () => {
         const payload: IUserPayload = {
