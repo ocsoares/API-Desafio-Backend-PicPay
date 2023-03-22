@@ -1,5 +1,5 @@
 export interface IUserJWT {
     readonly id: string;
-    readonly name: string;
+    readonly full_name: string;
     readonly email: string;
 }

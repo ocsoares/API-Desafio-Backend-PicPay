@@ -1,7 +1,11 @@
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsIn, IsNotEmpty, IsString } from 'class-validator';
 import { IsCPF } from 'class-validator-cpf';
 
 export class CreateUserDTO {
+    @IsNotEmpty()
+    @IsIn(['user', 'shopkeeper'])
+    readonly role: 'user' | 'shopkeeper';
+
     @IsNotEmpty()
     @IsString()
     readonly full_name: string;

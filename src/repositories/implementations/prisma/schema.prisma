@@ -10,8 +10,14 @@ datasource db {
     url      = env("PRISMA_URL")
 }
 
+enum Role {
+    user
+    shopkeeper
+}
+
 model User {
     id         String   @id @default(uuid())
+    role       Role
     full_name  String
     cpf        String   @unique
     email      String   @unique

@@ -39,6 +39,7 @@ export class CreateUserService implements IService {
         });
 
         const returnToBody: IReturnUser = {
+            role: createUser.role,
             full_name: createUser.full_name,
             email: createUser.email,
         };

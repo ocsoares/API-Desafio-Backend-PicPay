@@ -13,6 +13,7 @@ export class LoginUserService implements IService {
     async execute(data: IReturnUser): Promise<string> {
         const payload: IUserPayload = {
             sub: data.id,
+            role: data.role,
             full_name: data.full_name,
             email: data.email,
         };
