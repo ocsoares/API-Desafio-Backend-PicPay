@@ -1,7 +1,7 @@
 {
-  "name": "api-nestjs-template",
-  "version": "0.0.1",
-  "description": "Template para APIs usando NestJS",
+  "name": "api-desafio-backend-picpay",
+  "version": "1.0.0",
+  "description": "Uma API RESTful desenvolvida baseada em um desafio técnico da empresa PicPay",
   "author": "Cauã Soares",
   "private": true,
   "license": "ISC",
