@@ -14,6 +14,12 @@ export class SQLInMemoryUserRepository implements UserRepository {
         return newUser;
     }
 
+    async findById(id: string): Promise<IUser> {
+        const user = this.users.find((user) => user.id === id);
+
+        return user;
+    }
+
     async findByEmail(email: string): Promise<IUser> {
         const user = this.users.find((user) => user.email === email);
 
