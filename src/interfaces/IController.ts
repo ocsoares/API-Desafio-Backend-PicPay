@@ -1,6 +1,6 @@
 export interface returnHandle {
     message: string;
-    data: any;
+    data?: any;
 }
 
 export interface IController {

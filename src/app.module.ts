@@ -7,8 +7,7 @@ import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { LoginValidationBodyModule } from './modules/login-validation-body/login-validation-body.module';
 import { PrismaDatabaseModule } from './repositories/implementations/prisma/prisma-database.module';
 import { TransferModule } from './modules/transfer/transfer.module';
-import { TransferdoisController } from './modules/transferdois/transferdois.controller';
-import { TransferdoisService } from './modules/transferdois/transferdois.service';
+import { TransferAuthorizerService } from './providers/transfer-authorizer/transfer-authorizer.service';
 
 @Module({
     imports: [
@@ -29,8 +28,7 @@ import { TransferdoisService } from './modules/transferdois/transferdois.service
             provide: APP_GUARD,
             useClass: JwtAuthGuard,
         },
-        TransferdoisService,
+        TransferAuthorizerService,
     ],
-    controllers: [TransferdoisController],
 })
 export class AppModule {}
