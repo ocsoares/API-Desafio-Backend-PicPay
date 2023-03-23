@@ -28,3 +28,12 @@ model User {
 
     @@map("users")
 }
+
+model Notify {
+    id              String   @id @default(uuid())
+    payer           String
+    transfer_amount Float
+    transfer_time   DateTime
+    created_at      DateTime @default(now())
+    updated_at      DateTime @updatedAt
+}
