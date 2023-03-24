@@ -6,7 +6,7 @@ import { TransferToOwnEmailException } from 'src/exceptions/transfer-exceptions/
 import { UnauthorizedRoleTransferException } from 'src/exceptions/transfer-exceptions/unauthorized-role-transfer.exception';
 import { InvalidUserByIdException } from 'src/exceptions/user-exceptions/invalid-user-by-id.exception';
 import { IService } from 'src/interfaces/IService';
-import { ITransfer } from 'src/interfaces/ITransfer';
+import { ITransfer } from 'src/models/ITransfer';
 import { TransferAuthorizerService } from 'src/providers/transfer-authorizer/transfer-authorizer.service';
 import { TransferRepository } from 'src/repositories/abstracts/TransferRepository';
 import { UserRepository } from 'src/repositories/abstracts/UserRepository';

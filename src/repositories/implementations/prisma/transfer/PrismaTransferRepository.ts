@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ITransfer } from 'src/interfaces/ITransfer';
+import { ITransfer } from 'src/models/ITransfer';
 import { TransferRepository } from 'src/repositories/abstracts/TransferRepository';
 import { PrismaService } from '../prisma-client.service';
 
