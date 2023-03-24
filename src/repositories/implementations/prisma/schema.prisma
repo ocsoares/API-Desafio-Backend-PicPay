@@ -16,15 +16,16 @@ enum Role {
 }
 
 model User {
-    id         String   @id @default(uuid())
-    role       Role
-    full_name  String
-    cpf        String   @unique
-    email      String   @unique
-    password   String
-    balance    Float
-    created_at DateTime @default(now())
-    updated_at DateTime @updatedAt
+    id            String   @id @default(uuid())
+    role          Role
+    full_name     String
+    cpf           String   @unique
+    email         String   @unique
+    password      String
+    balance       Float
+    notifications Notify[]
+    created_at    DateTime @default(now())
+    updated_at    DateTime @updatedAt
 
     @@map("users")
 }
@@ -36,4 +37,8 @@ model Notify {
     transfer_time   DateTime
     created_at      DateTime @default(now())
     updated_at      DateTime @updatedAt
+    User            User     @relation(fields: [user_id], references: [id])
+    user_id         String
+
+    @@map("notifications")
 }
