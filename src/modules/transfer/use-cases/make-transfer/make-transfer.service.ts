@@ -46,7 +46,13 @@ export class MakeTransferService implements IService {
 
         // Transfer
 
-        if (user.balance < 1) {
+        if (user.balance === 0 || user.balance < 0) {
+            throw new InsufficientBalanceException();
+        }
+
+        const balanceAfterTransfer = user.balance - data.value;
+
+        if (balanceAfterTransfer < 0) {
             throw new InsufficientBalanceException();
         }
 

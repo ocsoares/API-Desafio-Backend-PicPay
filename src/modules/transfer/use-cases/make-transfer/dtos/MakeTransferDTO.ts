@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPositive } from 'class-validator';
 
 export class MakeTransferDTO {
     @IsNotEmpty()
@@ -6,6 +6,6 @@ export class MakeTransferDTO {
     readonly to_user_email: string;
 
     @IsNotEmpty()
-    @IsNumber(undefined, { message: 'value must be a number' })
+    @IsPositive()
     readonly value: number;
 }

@@ -11,13 +11,13 @@ export class PrismaTransferRepository implements TransferRepository {
         // Retira o valor a ser transferido do balanço do pagador
         await this._prismaService.user.update({
             where: { id: data.account_id },
-            data: { balance: { decrement: data.value } },
+            data: { balance: { decrement: parseFloat(data.value.toFixed(2)) } },
         });
 
         // Adiciona o valor recebido ao balanço do destinatário
         await this._prismaService.user.update({
             where: { email: data.to_user_email },
-            data: { balance: { increment: data.value } },
+            data: { balance: { increment: parseFloat(data.value.toFixed(2)) } },
         });
     }
 }
