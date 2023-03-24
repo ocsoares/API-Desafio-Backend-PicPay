@@ -13,7 +13,6 @@ import * as bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import { ConfigModule } from '@nestjs/config';
 import { LoginValidationBodyModule } from '../../../login-validation-body/login-validation-body.module';
-import { LoginRequestBody } from 'src/modules/auth/models/LoginRequestBody';
 import { invalidUserLoginExceptionMessage } from '../../../../exceptions/user-exceptions/invalid-user-login.exception';
 
 describe('LoginUserController', () => {
@@ -35,7 +34,9 @@ describe('LoginUserController', () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...userWithoutPass } = user;
 
-    const loginBody: LoginRequestBody = {
+    type loginRequestBody = { email: string; password: string };
+
+    const loginBody: loginRequestBody = {
         email: 'teste@gmail.com',
         password: 'teste123',
     };
