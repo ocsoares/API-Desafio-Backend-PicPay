@@ -7,11 +7,9 @@ import { PrismaService } from '../prisma-client.service';
 export class PrismaNotifyRepository implements NotifyRepository {
     constructor(private readonly _prismaService: PrismaService) {}
 
-    async send(data: INotify): Promise<INotify> {
-        const sendNotify = await this._prismaService.notify.create({
+    async send(data: INotify): Promise<void> {
+        await this._prismaService.notify.create({
             data,
         });
-
-        return sendNotify;
     }
 }
