@@ -8,21 +8,23 @@ import { InvalidUserByIdException } from 'src/exceptions/user-exceptions/invalid
 import { IService } from 'src/interfaces/IService';
 import { ITransfer } from 'src/models/ITransfer';
 import { TransferAuthorizerService } from 'src/providers/transfer-authorizer/transfer-authorizer.service';
+import { NotifyRepository } from 'src/repositories/abstracts/NotifyRepository';
 import { TransferRepository } from 'src/repositories/abstracts/TransferRepository';
 import { UserRepository } from 'src/repositories/abstracts/UserRepository';
+import { SendNotifyService } from '../../../../providers/send-notify/send-notify.service';
 
 @Injectable()
 export class MakeTransferService implements IService {
     constructor(
-        private readonly _makeTransferRepository: UserRepository,
-        private readonly _transferRepository: TransferRepository,
+        private readonly _makeTransferRepository: TransferRepository,
+        private readonly _userRepository: UserRepository,
+        private readonly _notifyRepository: NotifyRepository,
         private readonly _transferAuthorizerService: TransferAuthorizerService,
+        private readonly _sendNotifyService: SendNotifyService,
     ) {}
 
     async execute(data: ITransfer): Promise<void> {
-        const user = await this._makeTransferRepository.findById(
-            data.account_id,
-        );
+        const user = await this._userRepository.findById(data.account_id);
 
         if (!user) {
             throw new InvalidUserByIdException();
@@ -32,7 +34,7 @@ export class MakeTransferService implements IService {
             throw new UnauthorizedRoleTransferException();
         }
 
-        const isValidEmail = await this._makeTransferRepository.findByEmail(
+        const isValidEmail = await this._userRepository.findByEmail(
             data.to_user_email,
         );
 
@@ -57,14 +59,29 @@ export class MakeTransferService implements IService {
         }
 
         try {
-            const response = await this._transferAuthorizerService.execute();
+            const isAuthorized =
+                await this._transferAuthorizerService.execute();
 
-            if (response !== 'Success') {
+            if (isAuthorized !== 'Autorizado') {
                 throw new Error();
             }
 
-            await this._transferRepository.transfer(data);
-        } catch {
+            await this._makeTransferRepository.transfer(data);
+
+            await this._notifyRepository.send({
+                payer_name: user.full_name,
+                payer_cpf: user.cpf,
+                transfer_amount: data.value,
+                transfer_time: new Date(),
+                to_user_id: isValidEmail.id,
+            });
+
+            const notificationSent = await this._sendNotifyService.execute();
+
+            if (notificationSent !== 'Success') {
+                throw new Error();
+            }
+        } catch (error) {
             throw new TransferErrorException();
         }
     }
