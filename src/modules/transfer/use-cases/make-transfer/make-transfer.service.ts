@@ -23,7 +23,7 @@ export class MakeTransferService implements IService {
         private readonly _sendNotifyService: SendNotifyService,
     ) {}
 
-    async execute(data: ITransfer): Promise<void> {
+    async execute(data: ITransfer): Promise<string> {
         const user = await this._userRepository.findById(data.account_id);
 
         if (!user) {
@@ -84,5 +84,7 @@ export class MakeTransferService implements IService {
         } catch (error) {
             throw new TransferErrorException();
         }
+
+        return 'Transferência realizada com sucesso !';
     }
 }

@@ -7,7 +7,7 @@ import { MakeTransferService } from './make-transfer.service';
 
 @Controller()
 export class MakeTransferController implements IController {
-    constructor(private readonly _userTransferService: MakeTransferService) {}
+    constructor(private readonly _makeTransferService: MakeTransferService) {}
 
     @Post('transfer')
     @HttpCode(200)
@@ -15,13 +15,13 @@ export class MakeTransferController implements IController {
         @CurrentUser() user: IReturnUser,
         @Body() body: MakeTransferDTO,
     ): Promise<returnHandle> {
-        await this._userTransferService.execute({
+        const makeTransfer = await this._makeTransferService.execute({
             account_id: user.id,
             ...body,
         });
 
         return {
-            message: 'Transferência realizada com sucesso !',
+            message: makeTransfer,
         };
     }
 }
