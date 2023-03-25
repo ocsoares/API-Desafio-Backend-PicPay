@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { InsufficientBalanceException } from 'src/exceptions/transfer-exceptions/insufficient-balance.exception';
-import { InvalidEmailTransferException } from 'src/exceptions/transfer-exceptions/invalid-email-transfer.exception';
-import { TransferErrorException } from 'src/exceptions/transfer-exceptions/transfer-error.exception';
-import { TransferToOwnEmailException } from 'src/exceptions/transfer-exceptions/transfer-to-own-email.exception';
-import { UnauthorizedRoleTransferException } from 'src/exceptions/transfer-exceptions/unauthorized-role-transfer.exception';
-import { InvalidUserByIdException } from 'src/exceptions/user-exceptions/invalid-user-by-id.exception';
-import { IService } from 'src/interfaces/IService';
-import { ITransfer } from 'src/models/ITransfer';
-import { TransferAuthorizerService } from 'src/providers/transfer-authorizer/transfer-authorizer.service';
-import { NotifyRepository } from 'src/repositories/abstracts/NotifyRepository';
-import { TransferRepository } from 'src/repositories/abstracts/TransferRepository';
-import { UserRepository } from 'src/repositories/abstracts/UserRepository';
+import { InsufficientBalanceException } from '../../../../exceptions/transfer-exceptions/insufficient-balance.exception';
+import { InvalidEmailTransferException } from '../../../../exceptions/transfer-exceptions/invalid-email-transfer.exception';
+import { TransferErrorException } from '../../../../exceptions/transfer-exceptions/transfer-error.exception';
+import { TransferToOwnEmailException } from '../../../../exceptions/transfer-exceptions/transfer-to-own-email.exception';
+import { UnauthorizedRoleTransferException } from '../../../../exceptions/transfer-exceptions/unauthorized-role-transfer.exception';
+import { InvalidUserByIdException } from '../../../../exceptions/user-exceptions/invalid-user-by-id.exception';
+import { IService } from '../../../../interfaces/IService';
+import { ITransfer } from '../../../../models/ITransfer';
+import { TransferAuthorizerService } from '../../../../providers/transfer-authorizer/transfer-authorizer.service';
+import { NotifyRepository } from '../../../../repositories/abstracts/NotifyRepository';
+import { TransferRepository } from '../../../../repositories/abstracts/TransferRepository';
+import { UserRepository } from '../../../../repositories/abstracts/UserRepository';
 import { SendNotifyService } from '../../../../providers/send-notify/send-notify.service';
 
 @Injectable()
@@ -34,11 +34,11 @@ export class MakeTransferService implements IService {
             throw new UnauthorizedRoleTransferException();
         }
 
-        const isValidEmail = await this._userRepository.findByEmail(
+        const isValidPayee = await this._userRepository.findByEmail(
             data.to_user_email,
         );
 
-        if (!isValidEmail) {
+        if (!isValidPayee) {
             throw new InvalidEmailTransferException();
         }
 
@@ -73,7 +73,7 @@ export class MakeTransferService implements IService {
                 payer_cpf: user.cpf,
                 transfer_amount: data.value,
                 transfer_time: new Date(),
-                to_user_id: isValidEmail.id,
+                to_user_id: isValidPayee.id,
             });
 
             const notificationSent = await this._sendNotifyService.execute();
