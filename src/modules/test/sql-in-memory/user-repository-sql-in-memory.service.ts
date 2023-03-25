@@ -3,7 +3,7 @@ import { IUser } from '../../../models/IUser';
 import { UserRepository } from '../../../repositories/abstracts/UserRepository';
 
 @Injectable()
-export class SQLInMemoryUserRepository implements UserRepository {
+export class UserRepositorySQLInMemory implements UserRepository {
     private users: IUser[] = [];
 
     async create(data: IUser): Promise<IUser> {
