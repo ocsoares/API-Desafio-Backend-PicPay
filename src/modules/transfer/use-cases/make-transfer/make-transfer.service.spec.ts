@@ -349,7 +349,7 @@ describe('MakeTransferService', () => {
         expect(sendNotifyService.execute).toHaveBeenCalledTimes(0);
     });
 
-    it(`should NOT make a transfer if notification isn't sent`, async () => {
+    it(`should NOT make a transfer if notification isn't sent by external API`, async () => {
         (userRepository.findById as jest.Mock).mockResolvedValue(
             userPositiveBalance,
         );
