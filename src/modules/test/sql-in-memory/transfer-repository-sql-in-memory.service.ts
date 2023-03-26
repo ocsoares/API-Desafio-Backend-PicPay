@@ -16,15 +16,38 @@ interface IUserTest {
 
 @Injectable()
 export class TransferRepositorySQLInMemory implements TransferRepository {
-    private users: IUserTest[] = [];
-
     async transfer(data: ITransfer): Promise<void> {
-        // Encontra o remetente e decrementa o saldo
-        this.users.find((user) => user.id === data.account_id).balance -=
+        const payerUsers: IUserTest[] = [
+            {
+                id: data.account_id,
+                role: 'user',
+                full_name: 'Payer User',
+                cpf: '66099594043',
+                email: 'payeruser@gmail.com',
+                password: 'payeruser123',
+                balance: 230,
+            },
+        ];
+
+        const receiverUsers: IUserTest[] = [
+            {
+                id: 'receiveruser_id',
+                role: 'shopkeeper',
+                full_name: 'Receiver User',
+                cpf: '27345982050',
+                email: data.to_user_email,
+                password: 'receiveruser123',
+                balance: 100,
+            },
+        ];
+
+        // Encontra o pagador e decrementa o balanço
+        payerUsers.find((user) => user.id === data.account_id).balance -=
             data.value;
 
-        // Encontra o destinatário e incrementa o saldo
-        this.users.find((user) => user.email === data.to_user_email).balance +=
-            data.value;
+        // Encontra o destinatário e adiciona o valor recebido ao balanço
+        receiverUsers.find(
+            (user) => user.email === data.to_user_email,
+        ).balance += data.value;
     }
 }
