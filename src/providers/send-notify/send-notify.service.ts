@@ -4,7 +4,7 @@ import axios from 'axios';
 
 @Injectable()
 export class SendNotifyService implements IProvider {
-    async execute(): Promise<string | object> {
+    async execute(): Promise<string> {
         const response = await axios.get('http://o4d9z.mocklab.io/notify');
 
         return response.data.message;
