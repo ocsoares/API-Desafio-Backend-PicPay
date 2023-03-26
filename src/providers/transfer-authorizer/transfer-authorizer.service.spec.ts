@@ -1,18 +1,22 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { TransferAuthorizerService } from './transfer-authorizer.service';
+import axios from 'axios';
 
 describe('TransferAuthorizerService', () => {
-  let service: TransferAuthorizerService;
+    let transferAuthorizerService: TransferAuthorizerService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [TransferAuthorizerService],
-    }).compile();
+    beforeEach(() => {
+        transferAuthorizerService = new TransferAuthorizerService();
 
-    service = module.get<TransferAuthorizerService>(TransferAuthorizerService);
-  });
+        jest.spyOn(axios, 'get');
+    });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+    it('should return a message from the authorizer API', async () => {
+        const response = await transferAuthorizerService.execute();
+
+        expect(axios.get).toHaveBeenCalledWith(
+            'https://run.mocky.io/v3/8fafdd68-a090-496f-8c9a-3442cf30dae6',
+        );
+
+        expect(typeof response).toBe('string');
+    });
 });
