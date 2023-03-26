@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { IController, returnHandle } from 'src/interfaces/IController';
-import { IReturnUser } from 'src/interfaces/return-to-request/IReturnUser';
-import { CurrentUser } from 'src/modules/auth/decorators/current-user.decorator';
+import { IController, returnHandle } from '../../../../interfaces/IController';
+import { IReturnUser } from '../../../../interfaces/return-to-request/IReturnUser';
+import { CurrentUser } from '../../../../modules/auth/decorators/current-user.decorator';
 import { MakeTransferDTO } from './dtos/MakeTransferDTO';
 import { MakeTransferService } from './make-transfer.service';
 
