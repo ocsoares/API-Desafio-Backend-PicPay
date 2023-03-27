@@ -10,6 +10,10 @@ describe('TransferAuthorizerService', () => {
         jest.spyOn(axios, 'get');
     });
 
+    it('should be defined', () => {
+        expect(transferAuthorizerService).toBeDefined();
+    });
+
     it('should return a message from the authorizer API', async () => {
         const response = await transferAuthorizerService.execute();
 
