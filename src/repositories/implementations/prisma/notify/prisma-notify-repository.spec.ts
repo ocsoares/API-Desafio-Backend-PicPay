@@ -4,16 +4,7 @@ import { PrismaService } from '../prisma-client.service';
 import { PrismaNotifyRepository } from '../notify/PrismaNotifyRepository';
 import { IUser } from 'src/models/IUser';
 import { PrismaUserRepository } from '../user/PrismaUserRepository';
-
-// Aplicar as Migrations trocando a url do schema.prisma pelo DB de teste,
-// depois voltar ao de produção
-const prismaServiceTest = new PrismaService({
-    datasources: {
-        db: {
-            url: process.env.TEST_PRISMA_URL,
-        },
-    },
-});
+import { prismaServiceTest } from '../test/prismaServiceTest';
 
 describe('PrismaNotifyRepository', () => {
     let prismaNotifyRepository: PrismaNotifyRepository;
