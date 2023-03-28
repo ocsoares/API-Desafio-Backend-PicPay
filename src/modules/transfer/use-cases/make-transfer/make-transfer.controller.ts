@@ -1,4 +1,12 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+    ApiBadRequestResponse,
+    ApiBearerAuth,
+    ApiOkResponse,
+    ApiResponse,
+    ApiTags,
+    ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
 import { IController, returnHandle } from '../../../../interfaces/IController';
 import { IReturnUser } from '../../../../interfaces/return-to-request/IReturnUser';
 import { CurrentUser } from '../../../../modules/auth/decorators/current-user.decorator';
@@ -9,6 +17,12 @@ import { MakeTransferService } from './make-transfer.service';
 export class MakeTransferController implements IController {
     constructor(private readonly _makeTransferService: MakeTransferService) {}
 
+    @ApiTags('transfer')
+    @ApiBearerAuth('bearer')
+    @ApiUnauthorizedResponse()
+    @ApiBadRequestResponse()
+    @ApiResponse({ status: 402 })
+    @ApiOkResponse()
     @Post('transfer')
     @HttpCode(200)
     async handle(

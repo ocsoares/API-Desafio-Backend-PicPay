@@ -4,11 +4,24 @@ import { LocalAuthGuard } from '../../../auth/guards/local-auth.guard';
 import { IAuthRequest } from 'src/modules/auth/types/IAuthRequest';
 import { LoginUserService } from './login-user.service';
 import { IsPublic } from '../../../auth/decorators/is-public.decorator';
+import {
+    ApiBadRequestResponse,
+    ApiBody,
+    ApiOkResponse,
+    ApiTags,
+    ApiUnauthorizedResponse,
+} from '@nestjs/swagger';
+import { LoginRequestBody } from '../../../../modules/auth/models/LoginRequestBody';
 
 @Controller('auth')
 export class LoginUserController implements IController {
     constructor(private readonly _loginUserService: LoginUserService) {}
 
+    @ApiTags('auth-user')
+    @ApiBody({ type: LoginRequestBody })
+    @ApiUnauthorizedResponse()
+    @ApiOkResponse()
+    @ApiBadRequestResponse()
     @IsPublic()
     @Post('login')
     @HttpCode(200)
