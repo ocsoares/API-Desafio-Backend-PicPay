@@ -6,6 +6,13 @@ import { prismaServiceTest } from '../test/prismaServiceTest';
 import { PrismaTransferRepository } from './PrismaTransferRepository';
 import { ITransfer } from '../../../../models/ITransfer';
 
+// ENTENDER o porque tava dando erro com o:
+// await prismaService.user.deleteMany();
+// no afterAll, e sem o prismaService.notify.deleteMany(); !!!
+
+// OBS: ESSE aqui do Lado também >>>>
+// OBS: Ver também se não é causado pelo notify !!!
+
 describe('PrismaTransferRepository', () => {
     let prismaUserRepository: PrismaUserRepository;
     let prismaTransferRepository: PrismaTransferRepository;
@@ -60,6 +67,9 @@ describe('PrismaTransferRepository', () => {
     });
 
     afterAll(async () => {
+        // Como o notify é associado ao user, tem que limpar primeiro, se não dá erro
+        await prismaService.notify.deleteMany();
+
         await prismaService.user.deleteMany();
         await prismaService.$disconnect();
     });

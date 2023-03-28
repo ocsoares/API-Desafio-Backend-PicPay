@@ -42,6 +42,9 @@ describe('PrismaUserRepository', () => {
     });
 
     afterAll(async () => {
+        // Como o notify é associado ao user, tem que limpar primeiro, se não dá erro
+        await prismaService.notify.deleteMany();
+
         await prismaService.user.deleteMany();
         await prismaService.$disconnect();
     });

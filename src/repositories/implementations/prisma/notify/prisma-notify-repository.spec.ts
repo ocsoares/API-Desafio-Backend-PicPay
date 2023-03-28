@@ -46,13 +46,17 @@ describe('PrismaNotifyRepository', () => {
     });
 
     afterAll(async () => {
+        // Como o notify é associado ao user, tem que limpar primeiro, se não dá erro
+        await prismaService.notify.deleteMany();
+
+        await prismaService.user.deleteMany();
         await prismaService.$disconnect();
     });
 
-    beforeEach(async () => {
-        await prismaService.notify.deleteMany();
-        await prismaService.user.deleteMany();
-    });
+    // beforeEach(async () => {
+    //     await prismaService.notify.deleteMany();
+    //     await prismaService.user.deleteMany();
+    // });
 
     it('should be defined', () => {
         expect(prismaService).toBeDefined();
