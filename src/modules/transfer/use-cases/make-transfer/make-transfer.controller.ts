@@ -2,6 +2,7 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import {
     ApiBadRequestResponse,
     ApiBearerAuth,
+    ApiInternalServerErrorResponse,
     ApiOkResponse,
     ApiResponse,
     ApiTags,
@@ -22,6 +23,7 @@ export class MakeTransferController implements IController {
     @ApiUnauthorizedResponse()
     @ApiBadRequestResponse()
     @ApiResponse({ status: 402 })
+    @ApiInternalServerErrorResponse()
     @ApiOkResponse()
     @Post('transfer')
     @HttpCode(200)
