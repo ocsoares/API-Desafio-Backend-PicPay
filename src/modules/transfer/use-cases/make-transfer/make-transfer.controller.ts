@@ -18,7 +18,7 @@ export class MakeTransferController implements IController {
     constructor(private readonly _makeTransferService: MakeTransferService) {}
 
     @ApiTags('transfer')
-    @ApiBearerAuth('bearer')
+    @ApiBearerAuth()
     @ApiUnauthorizedResponse()
     @ApiBadRequestResponse()
     @ApiResponse({ status: 402 })
