@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode } from '@nestjs/common';
-import { IController, returnHandle } from 'src/interfaces/IController';
-import { IReturnUser } from 'src/interfaces/return-to-request/IReturnUser';
-import { CurrentUser } from 'src/modules/auth/decorators/current-user.decorator';
+import { IController, returnHandle } from '../../../../interfaces/IController';
+import { IReturnUser } from '../../../../interfaces/return-to-request/IReturnUser';
+import { CurrentUser } from '../../../../modules/auth/decorators/current-user.decorator';
 import { MeUserService } from './me-user.service';
 
 @Controller('auth')

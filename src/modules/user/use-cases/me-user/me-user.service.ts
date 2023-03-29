@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { InvalidUserByIdException } from 'src/exceptions/user-exceptions/invalid-user-by-id.exception';
-import { IService } from 'src/interfaces/IService';
-import { IReturnMeUser } from 'src/interfaces/return-to-request/IReturnMeUser';
-import { UserRepository } from 'src/repositories/abstracts/UserRepository';
+import { InvalidUserByIdException } from '../../../../exceptions/user-exceptions/invalid-user-by-id.exception';
+import { IService } from '../../../../interfaces/IService';
+import { IReturnMeUser } from '../../../../interfaces/return-to-request/IReturnMeUser';
+import { UserRepository } from '../../../../repositories/abstracts/UserRepository';
 
 @Injectable()
 export class MeUserService implements IService {
