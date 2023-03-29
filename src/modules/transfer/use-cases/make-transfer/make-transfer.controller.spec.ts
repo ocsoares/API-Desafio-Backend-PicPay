@@ -567,7 +567,9 @@ describe('MakeTransferController', () => {
 
         const { message } = response.body;
 
-        expect(message).toEqual('Transferência realizada com sucesso !');
+        expect(message).toEqual(
+            `Transferência realizada com sucesso no valor de R$${transferBody.value} para o usuário de email ${transferBody.to_user_email} !`,
+        );
 
         expect(makeTransferService.execute).toHaveBeenCalledWith(
             transferBodyWithAccountId,

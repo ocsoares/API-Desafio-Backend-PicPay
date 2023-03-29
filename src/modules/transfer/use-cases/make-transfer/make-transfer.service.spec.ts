@@ -401,7 +401,9 @@ describe('MakeTransferService', () => {
 
         await expect(
             makeTransferService.execute(transferBody),
-        ).resolves.toEqual('Transferência realizada com sucesso !');
+        ).resolves.toEqual(
+            `Transferência realizada com sucesso no valor de R$${transferBody.value} para o usuário de email ${transferBody.to_user_email} !`,
+        );
 
         expect(makeTransferService.execute).toHaveBeenCalledWith(transferBody);
 

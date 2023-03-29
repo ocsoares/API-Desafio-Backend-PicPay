@@ -91,6 +91,6 @@ export class MakeTransferService implements IService {
             throw new TransferErrorException();
         }
 
-        return 'Transferência realizada com sucesso !';
+        return `Transferência realizada com sucesso no valor de R$${data.value} para o usuário de email ${data.to_user_email} !`;
     }
 }
