@@ -11,7 +11,10 @@ import { TransferAuthorizerService } from '../../../../providers/transfer-author
 import { NotifyRepository } from '../../../../repositories/abstracts/NotifyRepository';
 import { TransferRepository } from '../../../../repositories/abstracts/TransferRepository';
 import { UserRepository } from '../../../../repositories/abstracts/UserRepository';
-import { SendNotifyService } from '../../../../providers/send-notify/send-notify.service';
+import {
+    exceededMonthlyRequestQuotaErrorMessage,
+    SendNotifyService,
+} from '../../../../providers/send-notify/send-notify.service';
 
 @Injectable()
 export class MakeTransferService implements IService {
@@ -78,7 +81,10 @@ export class MakeTransferService implements IService {
 
             const notificationSent = await this._sendNotifyService.execute();
 
-            if (notificationSent !== 'Success') {
+            if (
+                notificationSent !== 'Success' &&
+                notificationSent !== exceededMonthlyRequestQuotaErrorMessage
+            ) {
                 throw new Error();
             }
         } catch (error) {
