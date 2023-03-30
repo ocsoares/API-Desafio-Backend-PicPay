@@ -20,7 +20,39 @@ Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend 
 
 # Estrutura do projeto
 
-![Estrutura do projeto](https://raw.githubusercontent.com/ocsoares/images/master/images/api-picpay-structure.jpg)
+![Estrutura do projeto](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/structure.jpg)
+
+O projeto foi desenvolvido seguindo o **Clean Architecture** (Arquitetura Limpa), ou seja, o seu desenvolvimento feito **desacoplado**, separado por **camadas**, com o objetivo de facilitar a leitura do código, da escalabilidade, manutenção e a utilização de testes.
+
+As funcionalidades centrais da aplicação, como cadastro ou login, por exemplo, foram dividas em módulos próprios do NestJS, com seus respectivos use-cases, services, controllers e repositórios, que **dependem** de uma **interface**.
+
+Um exemplo a seguir dessa arquitetura, da funcionalidade de fazer transferências:
+
+## Use-cases e módulos
+
+![Use-cases e módulos](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/use-cases-e-modulos.jpg)
+
+![Use-cases e módulos transfer](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/use-cases-e-modulos-transfer.jpg)
+
+## Service
+
+![Service](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/service.jpg)
+
+## Controller
+
+![Controller](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/controller.jpg)
+
+## Repositório
+
+![Repositório](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/transfer-repository.jpg)
+
+## Implementação do Repositório
+
+![Implementação do Repositório](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/prisma-transfer-repository.jpg)
+
+## Injeção de Dependência do Repositório
+
+![Injeção de Dependência do Repositório](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/prisma-database-module.jpg)
 
 # Principais tecnologias e bibliotecas utilizadas
 
@@ -40,7 +72,7 @@ Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend 
 
 ## Características e funcionalidades do projeto:
 
-### Estrutural
+### Estrutural 🛠️
 
 -   Clean Code
 -   SOLID
@@ -49,7 +81,7 @@ Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend 
     <br>
     <br>
 
-### Rotas e validação
+### Rotas e validação 🔒
 
 -   DTOs validados com os tipos corretos para a requisição
 -   Rota de cadastramento e de login
@@ -59,7 +91,7 @@ Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend 
     <br>
     <br>
 
-### Funcionalidades
+### Funcionalidades 🎯
 
 -   **Usuários** podem realizar transferências para outros usuários e para lojistas
 -   **Lojistas** podem apenas **receber** transferências, não podem enviar dinheiro para nenhuma conta
@@ -71,7 +103,7 @@ Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend 
 
 Documentação feita com a ferramenta Swagger na rota **/docs**
 
-![Documentação](https://raw.githubusercontent.com/ocsoares/images/master/images/api-picpay-docs.jpg)
+![Documentação](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/docs.jpg)
 
 # Executar o projeto localmente
 
