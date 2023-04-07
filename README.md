@@ -132,7 +132,10 @@ npm start
 
 # Testes
 
-Foi desenvolvido testes para mais de **90%** das funcionalidades desse projeto. Pode-se executar os testes com o comando:
+Foi desenvolvido testes para praticamente **100%** das funcionalidades desse projeto.
+![Testes](https://raw.githubusercontent.com/ocsoares/images/master/api-picpay/tests.jpg)
+
+Pode-se executar os testes com o comando:
 
 ```bash
 npm test
