@@ -14,8 +14,6 @@
 
 🚀 https://api-desafio-backend-picpay.onrender.com/ <br>
 
-⚠️ **ATENÇÃO:** O link do Deploy pode demorar um pouco para carregar porque o serviço hiberna por inatividade.
-
 Essa API **RESTful** foi desenvolvida baseada em um desafio técnico de backend da empresa **PicPay**.
 
 # Estrutura do projeto
